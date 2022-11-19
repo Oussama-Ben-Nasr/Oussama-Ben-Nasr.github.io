@@ -1,0 +1,27 @@
+{
+  "name": "Oussama-Ben-Nasr.github.io",
+  "version": "1.0.0",
+  "description": "Personal Blogging website.",
+  "main": "index.js",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oussama-Ben-Nasr/Oussama-Ben-Nasr.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oussama-Ben-Nasr/Oussama-Ben-Nasr.github.io/issues"
+  },
+  "homepage": "https://github.com/Oussama-Ben-Nasr/Oussama-Ben-Nasr.github.io#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.2"
+  },
+  "dependencies": {
+    "luxon": "^3.1.0"
+  }
+}
