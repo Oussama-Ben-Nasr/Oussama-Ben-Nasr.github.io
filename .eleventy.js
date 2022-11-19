@@ -13,7 +13,7 @@ module.exports = function (eleventyConfig) {
 		);
 	});
 	dir: {
-		input: "src",
-			output: "docs"
-	}
+		input: "src"
+		//output: "docs"
+	};
 };
