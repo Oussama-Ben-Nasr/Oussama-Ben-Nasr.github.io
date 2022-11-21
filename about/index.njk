@@ -1,0 +1,99 @@
+---
+title: About Me
+layout: layouts/base.njk
+---
+
+<section class="hero is-info">
+  <div class="hero-body">
+    <p class="title">
+      About me
+    </p>
+    <p class="subtitle">
+      I like exploring and writing code.
+    </p>
+  </div>
+</section>
+
+<section>
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-parent">
+    <div class="tile is-childi box">
+      <p class="title">Experiance</p>
+    </div>
+    <div class="tile is-child box">
+      <p class="title">Education</p>
+    </div>
+    <div class="tile is-child box">
+      <p class="title">Hobbies & Interests</p>
+    <nav class="level">
+    <div class="level-left">  
+      <div>
+        <figure class="image is-128x128 to-right">
+          {% myResponsiveImage "./images/lamp.png", "oussama" %}
+        </figure>
+      </div>
+    </div>
+    <div class="level-right">  
+      <div>
+        <figure class="image is-128x128 to-right">
+          {% myResponsiveImage "./images/cauldron.png", "oussama" %}
+        </figure>
+      </div>
+    </div>
+    </nav>
+    </div>
+  </div>
+  <div class="tile is-parent is-4 is-vertical">
+    <div class="tile is-child box">
+      <div class="content is-small">
+      <p class="title">Skills</p>
+      <dl>
+      <dt><strong>Academic skills</strong></dt>
+      <span class="tag is-info">Algorithms & Data Structures</span>
+      <span class="tag is-info">Mathematics</span>
+      <span class="tag is-info">Networking</span>
+      <span class="tag is-info">Telecommunication</span>
+      <span class="tag is-info">Linux</span>
+      <dt><strong>Technologies</strong></dt>
+      <span class="tag is-info">C</span>
+      <span class="tag is-info">C++</span>
+      <span class="tag is-info">Python 3.8</span>
+      <span class="tag is-info">Debian</span>
+      <span class="tag is-info">Bash</span>
+      <span class="tag is-info">git</span>
+      <span class="tag is-info">Perforce</span>
+      <dt><strong>Frameworks & Tools</strong></dt>
+      <span class="tag is-info">Embedded Linux</span>
+      <span class="tag is-info">YOCTO</span>
+      <span class="tag is-info">OpenWrt</span>
+      <span class="tag is-info">BuildRoot</span>
+      <span class="tag is-info">BusyBox</span>
+      <span class="tag is-info">U-boot</span>
+      <span class="tag is-info">JTAG</span>
+      <span class="tag is-info">BSP</span>
+      <dt><strong>Patterns & Practices</strong></dt>
+      <span class="tag is-info">Object-Oriented Programming</span>
+      <span class="tag is-info">Functional Programming</span>
+      <span class="tag is-info">Test Driven Development</span>
+      <dt><strong>Project Managment</strong></dt>
+      <span class="tag is-info">Scrum</span>
+      <span class="tag is-info">Agile</span>
+      <span class="tag is-info">Jira</span>
+      </dl>
+      </div>
+    </div>
+    <div class="tile is-child box">
+      <p class="title">Projects</p>
+    </div>
+    <div class="tile is-child box">
+      <p class="title">Certifications</p>
+    </div>
+    <div class="tile is-child box">
+      <p class="title">Languages</p>
+      <span class="tag is-info">Arabic</span>
+      <span class="tag is-info">English</span>
+      <span class="tag is-info">French</span>
+    </div>
+  </div>
+</div>
+</section>
