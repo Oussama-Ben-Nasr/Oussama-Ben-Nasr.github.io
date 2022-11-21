@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="/css/style.css" />
-		<title>My First Blog Post</title>
+		<title>Conway&#39;s game of life</title>
 	</head>
 	<body>
 		<header><nav class="navbar is-light" role="navigation" aria-label="main navigation">
@@ -31,12 +31,17 @@
     <div class="columns">
       <div class="column is-8 is-offset-2">
         <article class="content mt-5">
-          <h1 class="title">My First Blog Post</h1>
+          <h1 class="title">Conway&#39;s game of life</h1>
           <p class="subtitle is-6">
-            Published on: <time datetime="Sat Jun 19 2021 00:00:00 GMT+0000 (Coordinated Universal Time)">19 Jun 2021</time>
+            Published on: <time datetime="Mon Nov 21 2022 00:00:00 GMT+0000 (Coordinated Universal Time)">21 Nov 2022</time>
           </p>
-          <p>You’ll find this post in your <code>posts</code> directory. Go ahead and edit it and re-build the site to see your changes.
-You can rebuild the site in many different ways, but the most common way is to run <code>eleventy --serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+          <p>imagine a 2D world composed of cells where each cell can be either alive or dead at any given point in time.</p>
+<p>Rules are simple:</p>
+<ol>
+<li>A living cell with 2 or 3 living neighbouring cells survives.</li>
+<li>A dead cell with exactly 3 living neighbouring alive cells becomes alive.</li>
+<li>Any other cell not fulfilling 1. and 2. shall remain or become dead.</li>
+</ol>
 
         </article>
       </div>
