@@ -1,8 +1,8 @@
 ---
-title: My Third Blog Post
-description: This is the first post on my blog
+title: How quick is Quick sort!
+description: We'll walk through sorting algorithms.
 tags: post
-date: 2021-06-19
+date: 2022-11-23
 layout: layouts/post.njk
 ---
-
+Still cooking!
