@@ -37,7 +37,7 @@ module.exports = function (eleventyConfig) {
 			      ${Object.values(stats).map(imageFormat => {
 				            return `  <source type="image/${imageFormat[0].format}" srcset="${imageFormat.map(entry => `${entry.url} ${entry.width}w`).join(", ")}" sizes="${sizes}">`;
 				          }).join("\n")}
-		        <amp-img
+		        <img
 			  class="is-rounded"
 		          alt="${alt}"
 		          src="${lowestSrc.url}"
