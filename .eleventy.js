@@ -13,6 +13,7 @@ module.exports = function (eleventyConfig) {
 			'dd LLL yyyy'
 		);
 	});
+	eleventyConfig.addPassthroughCopy({ "images/favicon": "/_site" });
 
 	eleventyConfig.addNunjucksAsyncShortcode("myResponsiveImage", async function (src, alt) {
 		    if (alt === undefined) {
