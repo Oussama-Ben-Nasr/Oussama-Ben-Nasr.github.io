@@ -1,15 +1,25 @@
 ---
-title: Homepage
+title: Welcome
 layout: layouts/base.njk
 ---
 
-<section class="hero is-medium is-primary is-bold">
+<section class="hero is-medium is-info is-bold">
   <div class="hero-body">
+    <nav class="level">
+    <div class="level-left">
     <div class="container">
       <h1 class="title">{{ site.title }}</h1>
       <h2 class="subtitle">{{ site.description }}</h2>
     </div>
-  </div>
+    </div>
+    <div class="level-right">  
+      <div>
+        <figure class="image is-128x128 to-right">
+          {% myResponsiveImage "./images/oussama.png", "oussama" %}
+        </figure>
+      </div>
+    </nav>
+    </div>
 </section>
 
 
@@ -19,6 +29,36 @@ layout: layouts/base.njk
     <div class="columns">
       {% for post in collections.post | reverse %}
         {% if loop.index0 < 3 %}
+          <div class="column">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title">
+                  {{ post.data.title }}
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  {{ post.data.description }}
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="{{ post.url }}" class="button is-fullwidth is-link card-footer-item">Read article</a>
+              </footer>
+            </div>
+          </div>
+          {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<section class="postlist mt-3 pt-3">
+  <div class="container">
+    <h2 class="title has-text-left mt-3 mb-6">More posts</h2>
+    <div class="columns">
+      {% for post in collections.post | reverse %}
+        {% if loop.index0 > 2 %}
           <div class="column">
             <div class="card">
               <header class="card-header">
