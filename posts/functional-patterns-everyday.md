@@ -1,0 +1,184 @@
+---
+layout: layouts/post.njk
+title: Functional patterns I use every day
+description: Map, flatMap, fold — how pure functions changed how I think about data.
+date: 2022-09-05
+tags:
+  - post
+  - Functional Programming
+---
+
+You don't need to understand monads to write functional code. You need `map`, `filter`, `flatMap`, and `fold`. These four operations cover the vast majority of data transformations in real codebases.
+
+Here's what each one actually does, illustrated concretely.
+
+## map: transform every element
+
+`map` applies a function to each element of a collection and returns a new collection. It never mutates, never skips, never changes the length.
+
+<figure>
+<svg viewBox="0 0 680 140" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+  <!-- Input -->
+  <text x="20" y="25" font-size="10" fill="#6b6b65" font-weight="500">INPUT</text>
+  <rect x="20" y="35" width="52" height="52" rx="4" fill="#f3f1ec" stroke="#ddd" stroke-width="1.5"/>
+  <text x="46" y="65" text-anchor="middle" font-size="18" font-weight="500" fill="#1a1a18">1</text>
+  <rect x="78" y="35" width="52" height="52" rx="4" fill="#f3f1ec" stroke="#ddd" stroke-width="1.5"/>
+  <text x="104" y="65" text-anchor="middle" font-size="18" font-weight="500" fill="#1a1a18">2</text>
+  <rect x="136" y="35" width="52" height="52" rx="4" fill="#f3f1ec" stroke="#ddd" stroke-width="1.5"/>
+  <text x="162" y="65" text-anchor="middle" font-size="18" font-weight="500" fill="#1a1a18">3</text>
+  <rect x="194" y="35" width="52" height="52" rx="4" fill="#f3f1ec" stroke="#ddd" stroke-width="1.5"/>
+  <text x="220" y="65" text-anchor="middle" font-size="18" font-weight="500" fill="#1a1a18">4</text>
+
+  <!-- Function box -->
+  <rect x="265" y="45" width="100" height="32" rx="4" fill="#c8593a"/>
+  <text x="315" y="65" text-anchor="middle" font-size="11" fill="white" font-weight="500">x => x * x</text>
+
+  <!-- Arrow -->
+  <path d="M 252 61 L 262 61" stroke="#c8593a" stroke-width="1.5"/>
+  <path d="M 368 61 L 378 61" stroke="#c8593a" stroke-width="1.5" marker-end="url(#b)"/>
+  <defs><marker id="b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c8593a"/></marker></defs>
+
+  <!-- Output -->
+  <text x="384" y="25" font-size="10" fill="#c8593a" font-weight="500">OUTPUT</text>
+  <rect x="384" y="35" width="52" height="52" rx="4" fill="#f5ede9" stroke="#c8593a" stroke-width="1.5"/>
+  <text x="410" y="65" text-anchor="middle" font-size="18" font-weight="500" fill="#c8593a">1</text>
+  <rect x="442" y="35" width="52" height="52" rx="4" fill="#f5ede9" stroke="#c8593a" stroke-width="1.5"/>
+  <text x="468" y="65" text-anchor="middle" font-size="18" font-weight="500" fill="#c8593a">4</text>
+  <rect x="500" y="35" width="52" height="52" rx="4" fill="#f5ede9" stroke="#c8593a" stroke-width="1.5"/>
+  <text x="526" y="65" text-anchor="middle" font-size="18" font-weight="500" fill="#c8593a">9</text>
+  <rect x="558" y="35" width="52" height="52" rx="4" fill="#f5ede9" stroke="#c8593a" stroke-width="1.5"/>
+  <text x="584" y="65" text-anchor="middle" font-size="18" font-weight="500" fill="#c8593a">16</text>
+
+  <text x="20" y="118" font-size="10" fill="#6b6b65">List(1, 2, 3, 4).map(x => x * x)  →  List(1, 4, 9, 16)</text>
+  <text x="20" y="133" font-size="10" fill="#6b6b65">Same length. Every element transformed. Nothing mutated.</text>
+</svg>
+<figcaption>map: one-to-one transformation. Input and output always have the same number of elements.</figcaption>
+</figure>
+
+```scala
+val prices = List(10.0, 25.5, 8.0, 42.0)
+val withTax = prices.map(p => p * 1.2)
+// List(12.0, 30.6, 9.6, 50.4)
+```
+
+## filter: keep what passes a test
+
+`filter` returns a new collection containing only elements for which the predicate returns `true`. Length shrinks or stays the same.
+
+```scala
+val scores = List(45, 82, 91, 38, 74, 55)
+val passing = scores.filter(_ >= 60)
+// List(82, 91, 74)
+```
+
+## flatMap: map then flatten
+
+This is the one that confuses people at first. `flatMap` applies a function that returns a collection to each element, then flattens all those collections into one.
+
+<figure>
+<svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+  <!-- Title -->
+  <text x="20" y="22" font-size="10" fill="#6b6b65">words.flatMap(w => w.split(""))  — split each word into its characters</text>
+
+  <!-- Input words -->
+  <rect x="20" y="35" width="80" height="30" rx="4" fill="#f3f1ec" stroke="#ddd" stroke-width="1.5"/>
+  <text x="60" y="55" text-anchor="middle" font-size="12" fill="#1a1a18">"hello"</text>
+  <rect x="110" y="35" width="80" height="30" rx="4" fill="#f3f1ec" stroke="#ddd" stroke-width="1.5"/>
+  <text x="150" y="55" text-anchor="middle" font-size="12" fill="#1a1a18">"world"</text>
+
+  <!-- map step -->
+  <text x="210" y="52" font-size="10" fill="#6b6b65">map →</text>
+
+  <rect x="256" y="30" width="100" height="40" rx="4" fill="#fff" stroke="#4a90d9" stroke-width="1.5"/>
+  <text x="306" y="47" text-anchor="middle" font-size="9" fill="#4a90d9" font-weight="500">"hello"</text>
+  <text x="306" y="62" text-anchor="middle" font-size="9" fill="#4a90d9">['h','e','l','l','o']</text>
+
+  <rect x="364" y="30" width="100" height="40" rx="4" fill="#fff" stroke="#4a90d9" stroke-width="1.5"/>
+  <text x="414" y="47" text-anchor="middle" font-size="9" fill="#4a90d9" font-weight="500">"world"</text>
+  <text x="414" y="62" text-anchor="middle" font-size="9" fill="#4a90d9">['w','o','r','l','d']</text>
+
+  <!-- flatten step -->
+  <text x="20" y="105" font-size="10" fill="#6b6b65">flatten →</text>
+
+  <rect x="80" y="115" width="24" height="24" rx="3" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+  <text x="92" y="131" text-anchor="middle" font-size="11" fill="#c8593a">h</text>
+  <rect x="108" y="115" width="24" height="24" rx="3" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+  <text x="120" y="131" text-anchor="middle" font-size="11" fill="#c8593a">e</text>
+  <rect x="136" y="115" width="24" height="24" rx="3" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+  <text x="148" y="131" text-anchor="middle" font-size="11" fill="#c8593a">l</text>
+  <rect x="164" y="115" width="24" height="24" rx="3" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+  <text x="176" y="131" text-anchor="middle" font-size="11" fill="#c8593a">l</text>
+  <rect x="192" y="115" width="24" height="24" rx="3" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+  <text x="204" y="131" text-anchor="middle" font-size="11" fill="#c8593a">o</text>
+  <rect x="228" y="115" width="24" height="24" rx="3" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+  <text x="240" y="131" text-anchor="middle" font-size="11" fill="#c8593a">w</text>
+  <rect x="256" y="115" width="24" height="24" rx="3" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+  <text x="268" y="131" text-anchor="middle" font-size="11" fill="#c8593a">o</text>
+  <rect x="284" y="115" width="24" height="24" rx="3" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+  <text x="296" y="131" text-anchor="middle" font-size="11" fill="#c8593a">r</text>
+  <rect x="312" y="115" width="24" height="24" rx="3" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+  <text x="324" y="131" text-anchor="middle" font-size="11" fill="#c8593a">l</text>
+  <rect x="340" y="115" width="24" height="24" rx="3" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+  <text x="352" y="131" text-anchor="middle" font-size="11" fill="#c8593a">d</text>
+
+  <text x="20" y="180" font-size="10" fill="#6b6b65">Two nested lists become one flat list. flatMap = map + flatten, applied in one pass.</text>
+</svg>
+<figcaption>flatMap maps each element to a collection, then merges all results into a single flat collection.</figcaption>
+</figure>
+
+`flatMap` is how you chain operations that might produce multiple results or might produce zero results (like `Option`).
+
+```scala
+// Expand each order into its line items
+val orders: List[Order] = getOrders()
+val allItems: List[Item] = orders.flatMap(_.items)
+
+// Option: chain operations that might fail
+def findUser(id: Int): Option[User] = ...
+def findAddress(user: User): Option[Address] = ...
+
+val address: Option[Address] =
+  findUser(42).flatMap(findAddress)
+  // None if either step fails — no null checks needed
+```
+
+## fold: reduce to a single value
+
+`fold` (or `reduce`) collapses a collection into a single value by repeatedly applying a combining function.
+
+```scala
+val numbers = List(1, 2, 3, 4, 5)
+
+// Sum
+val sum = numbers.foldLeft(0)(_ + _)  // 15
+
+// Build a string
+val joined = numbers.foldLeft("")((acc, n) => acc + n.toString)  // "12345"
+
+// Frequency map
+val words = List("apple", "banana", "apple", "cherry", "banana", "apple")
+val freq = words.foldLeft(Map.empty[String, Int]) { (acc, w) =>
+  acc.updated(w, acc.getOrElse(w, 0) + 1)
+}
+// Map(apple -> 3, banana -> 2, cherry -> 1)
+```
+
+## Chaining them together
+
+The real power is composition. A complex transformation becomes a readable pipeline.
+
+```scala
+case class Transaction(amount: Double, category: String, failed: Boolean)
+
+val transactions: List[Transaction] = getTransactions()
+
+val totalSpentOnFood: Double = transactions
+  .filter(!_.failed)                   // drop failures
+  .filter(_.category == "food")        // only food
+  .map(_.amount)                       // extract amounts
+  .foldLeft(0.0)(_ + _)               // sum them
+```
+
+Four lines. No mutation. No intermediate variables. No off-by-one errors. Each step says exactly what it does.
+
+This is why functional patterns matter — not as philosophy, but as a way to write code that's easier to read, test, and reason about.

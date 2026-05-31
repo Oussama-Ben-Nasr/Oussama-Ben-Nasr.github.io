@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+title: All Posts
+permalink: /posts/
+---
+<div class="posts-page">
+  <div class="posts-page-header">
+    <h1>All Posts</h1>
+    <p>{{ collections.posts | length }} articles on code, craft, and curiosity.</p>
+  </div>
+  <div class="posts-list">
+    {% for post in collections.posts %}
+    <a href="{{ post.url }}" class="post-row">
+      <div>
+        <div class="post-row-title">{{ post.data.title }}</div>
+        <div class="post-row-desc">{{ post.data.description }}</div>
+      </div>
+      <div class="post-row-date">{{ post.date | dateFormat }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</div>

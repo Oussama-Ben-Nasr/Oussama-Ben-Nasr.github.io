@@ -1,19 +1,25 @@
 ---
 layout: layouts/base.njk
 ---
-
-<section class="page-layout">
-  <div class="container">
-    <div class="columns">
-      <div class="column is-8 is-offset-2">
-        <article class="content mt-5">
-          <h1 class="title">{{ title }}</h1>
-          <p class="subtitle is-6">
-            Published on: <time datetime="{{ page.date}}">{{ page.date | readableDate}}</time>
-          </p>
-          {{ content | safe }}
-        </article>
+<article class="post-article">
+  <header class="post-header">
+    <div class="post-header-inner">
+      <div class="post-tag-label">{{ tags[1] or "General" }}</div>
+      <h1 class="post-title">{{ title }}</h1>
+      <p class="post-subtitle">{{ description }}</p>
+      <div class="post-meta-bar">
+        <span>{{ page.date | dateFormat }}</span>
+        <span class="dot">·</span>
+        <span>{{ content | readingTime }} min read</span>
       </div>
     </div>
+  </header>
+
+  <div class="post-body">
+    {{ content | safe }}
   </div>
-</section>
+
+  <footer class="post-footer">
+    <a href="/posts/" class="btn btn-ghost">← Back to all posts</a>
+  </footer>
+</article>

@@ -1,0 +1,21 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Oussama Ben Nasr</title>
+  <subtitle>Writing on code, craft, and curiosity.</subtitle>
+  <link href="https://oussama-ben-nasr.github.io/feed.xml" rel="self"/>
+  <link href="https://oussama-ben-nasr.github.io/"/>
+  <id>https://oussama-ben-nasr.github.io/</id>
+  <author><name>Oussama Ben Nasr</name></author>
+  {% for post in collections.posts | slice(0, 10) %}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="https://oussama-ben-nasr.github.io{{ post.url }}"/>
+    <id>https://oussama-ben-nasr.github.io{{ post.url }}</id>
+    <content type="html"><![CDATA[{{ post.templateContent | safe }}]]></content>
+  </entry>
+  {% endfor %}
+</feed>

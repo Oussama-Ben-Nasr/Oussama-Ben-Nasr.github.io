@@ -1,0 +1,143 @@
+---
+layout: layouts/post.njk
+title: My note-taking system for technical reading
+description: How I retain information from papers, books, and documentation using simple tools.
+date: 2022-07-20
+tags:
+  - post
+  - Tooling
+---
+
+Most technical reading doesn't stick. You finish a chapter, feel like you understood it, then two weeks later you can't reconstruct the core idea. This isn't a memory problem — it's a processing problem.
+
+The solution isn't reading more carefully. It's writing while you read.
+
+## The problem with passive reading
+
+Reading produces the illusion of understanding. The words make sense on the page. The examples are clear. You nod along. Then you close the book and the knowledge drains away, because you never had to *generate* anything from it.
+
+Active recall — forcing yourself to retrieve information — is one of the most evidence-backed learning techniques we have. Note-taking is how you build the material to recall from.
+
+<figure>
+<svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+  <!-- Passive -->
+  <text x="30" y="25" text-anchor="middle" font-size="11" font-weight="500" fill="#6b6b65">Passive reading</text>
+  <rect x="10" y="35" width="380" height="30" rx="20" fill="#f3f1ec" stroke="#ddd" stroke-width="1.5"/>
+  <rect x="10" y="35" width="380" height="30" rx="20" fill="url(#grad1)"/>
+  <defs>
+    <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c8593a" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#e8947a" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#f3f1ec" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c8593a" stop-opacity="0.9"/>
+      <stop offset="90%" stop-color="#c8593a" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#f5ede9" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+  <text x="200" y="55" text-anchor="middle" font-size="10" fill="white">retention fades fast</text>
+
+  <text x="30" y="95" text-anchor="middle" font-size="11" font-weight="500" fill="#c8593a">Active reading + notes</text>
+  <rect x="10" y="105" width="380" height="30" rx="20" fill="url(#grad2)"/>
+  <text x="200" y="125" text-anchor="middle" font-size="10" fill="white">knowledge stays accessible</text>
+
+  <!-- Time axis -->
+  <line x1="10" y1="160" x2="400" y2="160" stroke="#ddd" stroke-width="1"/>
+  <text x="10" y="175" font-size="9" fill="#6b6b65">Read</text>
+  <text x="90" y="175" font-size="9" fill="#6b6b65">1 day</text>
+  <text x="190" y="175" font-size="9" fill="#6b6b65">1 week</text>
+  <text x="310" y="175" font-size="9" fill="#6b6b65">1 month</text>
+
+  <!-- Legend -->
+  <text x="440" y="60" font-size="10" fill="#6b6b65">The Ebbinghaus forgetting</text>
+  <text x="440" y="76" font-size="10" fill="#6b6b65">curve. Without active</text>
+  <text x="440" y="92" font-size="10" fill="#6b6b65">recall, 50% of new</text>
+  <text x="440" y="108" font-size="10" fill="#6b6b65">information is gone</text>
+  <text x="440" y="124" font-size="10" fill="#6b6b65">within an hour.</text>
+</svg>
+<figcaption>The forgetting curve: passive reading fades quickly. Notes you revisit become durable knowledge.</figcaption>
+</figure>
+
+## My system: three layers
+
+### Layer 1 — Highlights and inline notes
+
+While reading (paper or PDF), I highlight sparingly: only things I'd want to find again. Alongside highlights I write tiny marginalia — not copying the text, but my reaction to it.
+
+- "This contradicts what X said about Y"
+- "This is why the API is designed that way"
+- "Remember: this only applies when Z"
+
+These notes are cheap to write and expensive to skip.
+
+### Layer 2 — The concept note
+
+After finishing a chapter or a major section, I close the source and write a concept note from memory. This is the active recall step. Structure:
+
+```
+# [Concept name]
+
+## What it is
+One or two sentences, in my own words.
+
+## Why it matters
+What problem does it solve? When would I use it?
+
+## The key insight
+The thing I'd forget in two weeks if I didn't write it down.
+
+## Code example (if applicable)
+Something I could explain to someone else.
+
+## Connections
+What does this relate to that I already know?
+```
+
+I write these as plain Markdown files in a `notes/` folder. No fancy app. A flat file is searchable, portable, and won't disappear when a startup shuts down.
+
+### Layer 3 — The weekly review
+
+Every Sunday, I spend 15 minutes scanning recent concept notes and asking: "Could I explain this to someone?" If not, I re-read the source section and rewrite the note.
+
+This forces spaced repetition naturally. The notes that need rereading get reread. The ones that stuck get confirmed.
+
+<figure>
+<svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+  <text x="340" y="20" text-anchor="middle" font-size="11" font-weight="500" fill="#1a1a18">The weekly cycle</text>
+  <!-- Cycle arrows -->
+  <circle cx="340" cy="95" r="60" fill="none" stroke="#f3f1ec" stroke-width="2"/>
+
+  <rect x="280" y="40" width="120" height="28" rx="4" fill="#f5ede9" stroke="#c8593a" stroke-width="1.5"/>
+  <text x="340" y="57" text-anchor="middle" font-size="10" fill="#c8593a">Read + highlight</text>
+
+  <rect x="430" y="80" width="120" height="28" rx="4" fill="#f5ede9" stroke="#c8593a" stroke-width="1.5"/>
+  <text x="490" y="97" text-anchor="middle" font-size="10" fill="#c8593a">Write concept notes</text>
+
+  <rect x="280" y="136" width="120" height="28" rx="4" fill="#f5ede9" stroke="#c8593a" stroke-width="1.5"/>
+  <text x="340" y="153" text-anchor="middle" font-size="10" fill="#c8593a">Weekly review</text>
+
+  <rect x="130" y="80" width="120" height="28" rx="4" fill="#1a1a18" stroke="#1a1a18" stroke-width="1.5"/>
+  <text x="190" y="97" text-anchor="middle" font-size="10" fill="white">Recall → rewrite</text>
+
+  <!-- Arrows -->
+  <path d="M 380 54 Q 440 54 440 80" stroke="#c8593a" stroke-width="1.5" fill="none" marker-end="url(#c)"/>
+  <path d="M 440 108 Q 440 150 380 150" stroke="#c8593a" stroke-width="1.5" fill="none" marker-end="url(#c)"/>
+  <path d="M 300 150 Q 240 150 240 108" stroke="#c8593a" stroke-width="1.5" fill="none" marker-end="url(#c)"/>
+  <path d="M 240 80 Q 240 54 300 54" stroke="#c8593a" stroke-width="1.5" fill="none" marker-end="url(#c)"/>
+  <defs><marker id="c" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#c8593a"/></marker></defs>
+</svg>
+<figcaption>Reading is just the input. Writing, recalling, and reviewing are where the learning happens.</figcaption>
+</figure>
+
+## What I don't do
+
+I don't use Notion, Roam, Obsidian, or any other "second brain" app. I've tried them. The tooling became the project.
+
+A `notes/` folder with Markdown files, tracked in git, searched with `grep`. That's it. The constraint forces clarity — you can't hide behind features.
+
+## The one rule
+
+Write the note before you move on. Not tomorrow. Not after you finish the book. Immediately after the section that warranted a note.
+
+The note doesn't need to be good. It needs to exist. A rough note you wrote five minutes after reading beats a perfect note you intended to write and never did.

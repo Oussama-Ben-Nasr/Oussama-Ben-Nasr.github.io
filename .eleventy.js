@@ -1,49 +1,35 @@
-const Image = require("@11ty/eleventy-img");
-const { DateTime } = require('luxon');
+const { DateTime } = require("luxon");
 
 module.exports = function (eleventyConfig) {
-	// Copy the `css` directory to the output
-	eleventyConfig.addPassthroughCopy('css');
+  // Passthrough copies
+  eleventyConfig.addPassthroughCopy("css");
+  eleventyConfig.addPassthroughCopy("img");
 
-	// Watch the `css` directory for changes
-	eleventyConfig.addWatchTarget('css');
+  // Date filter
+  eleventyConfig.addFilter("dateFormat", (dateObj) => {
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("MMM yyyy");
+  });
 
-	eleventyConfig.addFilter('readableDate', (dateObj) => {
-		return DateTime.fromJSDate(dateObj, { zone: 'utc' }).toFormat(
-			'dd LLL yyyy'
-		);
-	});
-	eleventyConfig.addPassthroughCopy({ "images/favicon": "/_site" });
+  // Reading time filter
+  eleventyConfig.addFilter("readingTime", (content) => {
+    const text = content.replace(/<[^>]*>/g, "");
+    const words = text.split(/\s+/).length;
+    return Math.ceil(words / 200);
+  });
 
-	eleventyConfig.addNunjucksAsyncShortcode("myResponsiveImage", async function (src, alt) {
-		    if (alt === undefined) {
-			    throw new Error(`Missing \`alt\` on myResponsiveImage from: ${src}`);
-			        }
+  // Post collection (sorted newest first)
+  eleventyConfig.addCollection("posts", function (collectionApi) {
+    return collectionApi.getFilteredByGlob("posts/*.md").reverse();
+  });
 
-		    let outputFormat = "png";
-		    let stats = await Image(src, {
-			            widths: [null],
-			            formats: [outputFormat],
-			            urlPath: "/images/",
-			            outputDir: "_site/images/",
-			            cacheOptions: {
-					              duration: "1d",
-					              directory: ".cache",
-					              removeUrlQueryParams: false,
-					            }
-			          });
-		    let lowestSrc = stats[outputFormat][0];
-		let sizes = "100vw";
-		return `<picture>
-			      ${Object.values(stats).map(imageFormat => {
-				            return `  <source type="image/${imageFormat[0].format}" srcset="${imageFormat.map(entry => `${entry.url} ${entry.width}w`).join(", ")}" sizes="${sizes}">`;
-				          }).join("\n")}
-		        <img
-			  class="is-rounded"
-		          alt="${alt}"
-		          src="${lowestSrc.url}"
-		          width="${lowestSrc.width}"
-		          height="${lowestSrc.height}">
-			      </picture>`;
-		  });
+  return {
+    dir: {
+      input: ".",
+      includes: "_includes",
+      output: "_site",
+    },
+    markdownTemplateEngine: "njk",
+    htmlTemplateEngine: "njk",
+    templateFormats: ["md", "njk", "html"],
+  };
 };

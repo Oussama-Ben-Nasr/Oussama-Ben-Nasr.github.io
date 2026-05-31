@@ -1,83 +1,99 @@
 ---
-title: Welcome
 layout: layouts/base.njk
 ---
 
-<section class="hero is-medium is-info is-bold">
-  <div class="hero-body">
-    <nav class="level">
-    <div class="level-left">
-    <div class="container">
-      <h1 class="title">{{ site.title }}</h1>
-      <h2 class="subtitle">{{ site.description }}</h2>
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">Personal Blog &amp; Notes</p>
+    <h1>Writing on code, craft, <em>and curiosity.</em></h1>
+    <p class="hero-desc">I'm a developer who writes about software engineering, functional programming, tools I find interesting, and things I'm learning along the way.</p>
+    <div class="hero-actions">
+      <a href="/posts/" class="btn btn-primary">Read the blog →</a>
+      <a href="/about/" class="btn btn-ghost">About me</a>
     </div>
-    </div>
-    <div class="level-right">  
-      <div>
-        <figure class="image is-128x128 to-right">
-          {% myResponsiveImage "./images/oussama.png", "oussama" %}
-        </figure>
+  </div>
+  <div class="hero-avatar">
+    <span class="avatar-initials">OB</span>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <div class="search-bar">
+    <span>🔍</span>
+    <input type="text" placeholder="Search posts…" id="search-input" aria-label="Search posts">
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Recent posts</h2>
+    <a href="/posts/" class="section-link">All posts →</a>
+  </div>
+  <div class="posts-featured" id="featured-posts">
+    {% for post in collections.posts | slice(0, 3) %}
+    <a href="{{ post.url }}" class="post-card">
+      <span class="post-tag">{{ post.data.tags[1] or "General" }}</span>
+      <h3>{{ post.data.title }}</h3>
+      <p>{{ post.data.description }}</p>
+      <div class="post-meta">
+        <span>{{ post.date | dateFormat }}</span>
+        <span class="dot">·</span>
+        <span>{{ post.templateContent | readingTime }} min read</span>
       </div>
-    </nav>
-    </div>
-</section>
-
-
-<section class="postlist mt-3 pt-3">
-  <div class="container">
-    <h2 class="title has-text-centered mt-3 mb-6">Recent posts</h2>
-    <div class="columns">
-      {% for post in collections.post | reverse %}
-        {% if loop.index0 < 3 %}
-          <div class="column">
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title">
-                  {{ post.data.title }}
-                </p>
-              </header>
-              <div class="card-content">
-                <div class="content">
-                  {{ post.data.description }}
-                </div>
-              </div>
-              <footer class="card-footer">
-                <a href="{{ post.url }}" class="button is-fullwidth is-link card-footer-item">Read more...</a>
-              </footer>
-            </div>
-          </div>
-          {% endif %}
-      {% endfor %}
-    </div>
+    </a>
+    {% endfor %}
   </div>
 </section>
 
+<div class="section-divider"></div>
 
-<section class="postlist mt-3 pt-3">
-  <div class="container">
-    <h2 class="title has-text-left mt-3 mb-6">More posts</h2>
-    <div class="columns">
-      {% for post in collections.post | reverse %}
-        {% if loop.index0 > 2 %}
-          <div class="column">
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title">
-                  {{ post.data.title }}
-                </p>
-              </header>
-              <div class="card-content">
-                <div class="content">
-                  {{ post.data.description }}
-                </div>
-              </div>
-              <footer class="card-footer">
-                <a href="{{ post.url }}" class="button is-fullwidth is-link card-footer-item">Read more...</a>
-              </footer>
-            </div>
-          </div>
-          {% endif %}
-      {% endfor %}
-    </div>
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">More posts</h2>
+  </div>
+  <div class="posts-list" id="more-posts">
+    {% for post in collections.posts | slice(3) %}
+    <a href="{{ post.url }}" class="post-row">
+      <div>
+        <div class="post-row-title">{{ post.data.title }}</div>
+        <div class="post-row-desc">{{ post.data.description }}</div>
+      </div>
+      <div class="post-row-date">{{ post.date | dateFormat }}</div>
+    </a>
+    {% endfor %}
   </div>
 </section>
+
+<div class="about-strip" id="about-strip">
+  <div class="about-inner">
+    <div>
+      <h2>A developer who likes to <em>write</em> as much as code.</h2>
+      <p>I started this blog to document what I'm learning and share ideas with anyone curious enough to read them.</p>
+    </div>
+    <div class="about-tags">
+      <span class="about-tag">Scala</span>
+      <span class="about-tag">JavaScript</span>
+      <span class="about-tag">Eleventy</span>
+      <span class="about-tag">Functional Programming</span>
+      <span class="about-tag">Open Source</span>
+      <span class="about-tag">Linux</span>
+      <span class="about-tag">CI/CD</span>
+      <span class="about-tag">Clean Code</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const input = document.getElementById('search-input');
+const allItems = document.querySelectorAll('.post-card, .post-row');
+input.addEventListener('input', () => {
+  const q = input.value.toLowerCase().trim();
+  allItems.forEach(el => {
+    const match = !q || el.textContent.toLowerCase().includes(q);
+    el.style.opacity = match ? '1' : '0.2';
+    el.style.pointerEvents = match ? 'auto' : 'none';
+  });
+});
+</script>

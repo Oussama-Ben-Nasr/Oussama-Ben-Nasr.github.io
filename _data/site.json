@@ -1,6 +1,7 @@
 {
-	"title": "Oussama Ben Nasr's blog",
-	"url": "https://Oussama-Ben-Nasr.github.io/",
-	"language": "en-US",
-	"description": "My thaughts and projects."
+  "title": "Oussama Ben Nasr",
+  "description": "Writing on code, craft, and curiosity.",
+  "url": "https://oussama-ben-nasr.github.io",
+  "author": "Oussama Ben Nasr",
+  "github": "https://github.com/Oussama-Ben-Nasr"
 }
