@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A curated list of CLI tools, plugins, and utilities that make me significantly faster.">
+  <title>The developer tools I can&#39;t live without — Oussama Ben Nasr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Oussama Ben Nasr" href="/feed.xml">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">Oussama Ben Nasr</a>
+  <ul class="nav-links">
+    <li><a href="/" >Home</a></li>
+    <li><a href="/posts/" class="active">Posts</a></li>
+    <li><a href="/about/" >About</a></li>
+    <li><a href="/feed.xml">RSS</a></li>
+  </ul>
+</nav>
+
+<main>
+  <article class="post-article">
+  <header class="post-header">
+    <div class="post-header-inner">
+      <div class="post-tag-label">Tooling</div>
+      <h1 class="post-title">The developer tools I can&#39;t live without</h1>
+      <p class="post-subtitle">A curated list of CLI tools, plugins, and utilities that make me significantly faster.</p>
+      <div class="post-meta-bar">
+        <span>Jun 2022</span>
+        <span class="dot">·</span>
+        <span>3 min read</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <p>Tools compound. A small improvement to something you do fifty times a day multiplies fast. Here are the tools that have actually changed how I work — not the ones I tried once and forgot.</p>
+<h2>Terminal: the foundation</h2>
+<h3><code>fzf</code> — fuzzy finder</h3>
+<p><code>fzf</code> is a command-line fuzzy finder that integrates with your shell. Press <code>Ctrl+R</code> and your history becomes an interactive, searchable list. Press <code>Ctrl+T</code> and the same thing happens for file paths.</p>
+<pre><code class="language-bash"># Without fzf: remember exact command and scroll history
+# With fzf: Ctrl+R, type a few letters, hit Enter
+
+# Find and open any file in the project
+vim $(fzf)
+
+# Preview files as you browse
+fzf --preview 'cat {}'
+</code></pre>
+<p>If you install nothing else from this list, install <code>fzf</code>.</p>
+<h3><code>ripgrep</code> (<code>rg</code>) — code search</h3>
+<p><code>rg</code> is a replacement for <code>grep</code> that respects <code>.gitignore</code>, searches recursively by default, and is significantly faster. The output is also much more readable.</p>
+<pre><code class="language-bash"># grep: verbose, slow, shows binary files
+grep -r --include=&quot;*.scala&quot; &quot;foldLeft&quot; .
+
+# rg: clean, fast, gitignore-aware
+rg &quot;foldLeft&quot; --type scala
+</code></pre>
+<figure>
+<svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+  <rect x="10" y="10" width="660" height="140" rx="6" fill="#1a1a18"/>
+  <text x="30" y="38" font-size="11" fill="#6b9e6b" font-family="Courier New">$ rg "foldLeft" --type scala</text>
+<p><text x="30" y="62" font-size="11" fill="#4a90d9" font-family="Courier New">src/main/Parser.scala</text>
+<text x="30" y="80" font-size="11" fill="#6b6b65" font-family="Courier New">12:</text>
+<text x="62" y="80" font-size="11" fill="#e8e8e2" font-family="Courier New">    .foldLeft(Map.empty[String, Int]) { (acc, item) =&gt;</text></p>
+<p><text x="30" y="104" font-size="11" fill="#4a90d9" font-family="Courier New">src/main/Processor.scala</text>
+<text x="30" y="122" font-size="11" fill="#6b6b65" font-family="Courier New">47:</text>
+<text x="62" y="122" font-size="11" fill="#e8e8e2" font-family="Courier New">  val total = transactions.foldLeft(0.0)(_ + _.amount)</text></p>
+<p><text x="30" y="146" font-size="11" fill="#6b6b65" font-family="Courier New">2 matches in 2 files</text>
+</svg></p>
+<figcaption>ripgrep output: filename highlighted, line numbers shown, only relevant results — no noise.</figcaption>
+</figure>
+<h3><code>bat</code> — better <code>cat</code></h3>
+<p><code>bat</code> is <code>cat</code> with syntax highlighting, line numbers, and git integration. I've aliased <code>cat</code> to <code>bat</code> and haven't looked back.</p>
+<pre><code class="language-bash"># Shows code with syntax highlighting
+bat src/main/MyFile.scala
+
+# Works great with fzf preview
+fzf --preview 'bat --color=always {}'
+</code></pre>
+<h3><code>z</code> — directory jumping</h3>
+<p><code>z</code> tracks which directories you visit most and lets you jump to them by typing a substring.</p>
+<pre><code class="language-bash"># Instead of: cd ~/projects/work/backend/src/main
+z backend
+# Jumps to the most-visited directory matching &quot;backend&quot;
+</code></pre>
+<h2>Editor: VS Code extensions</h2>
+<h3>Error Lens</h3>
+<p>Inline error and warning display — no more hovering to see what's wrong. The message appears right next to the offending line.</p>
+<h3>GitLens</h3>
+<p>Shows who wrote every line of code, when, and from which commit — inline, without leaving the editor. Indispensable for working in a codebase you didn't write alone.</p>
+<h3>File Nesting</h3>
+<p>Groups related files in the explorer: <code>Component.tsx</code>, <code>Component.test.tsx</code>, and <code>Component.module.css</code> nest under one entry. Dramatically reduces sidebar noise.</p>
+<h2>Git workflow tools</h2>
+<h3><code>git log --oneline --graph --decorate</code></h3>
+<p>Aliased to <code>git lg</code>. Shows a compact visual branch graph:</p>
+<pre><code class="language-bash"># In ~/.gitconfig:
+[alias]
+  lg = log --oneline --graph --decorate --all
+</code></pre>
+<h3>Conventional commits</h3>
+<p>Not a tool — a convention. Every commit message starts with a type: <code>feat:</code>, <code>fix:</code>, <code>docs:</code>, <code>refactor:</code>, <code>chore:</code>. This makes history scannable and enables automatic changelog generation.</p>
+<pre><code class="language-bash">feat: add reading time filter to post layout
+fix: close missing div in hero section
+docs: update README with new build instructions
+</code></pre>
+<h2>The selection principle</h2>
+<p>I only add a tool permanently if I notice I'm using it every day after a week. Most tools I try don't make it past that filter. The ones that do tend to stick for years.</p>
+<p>The goal isn't an impressive dotfiles repo. It's a workflow that's frictionless enough to stay out of the way of the actual work.</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <a href="/posts/" class="btn btn-ghost">← Back to all posts</a>
+  </footer>
+</article>
+
+</main>
+
+<footer class="footer">
+  <p>© 2024 Oussama Ben Nasr. Built with Eleventy.</p>
+  <ul class="footer-links">
+    <li><a href="https://github.com/Oussama-Ben-Nasr" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="/feed.xml">RSS</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How solving daily puzzles accelerated my functional programming intuition in ways no tutorial could.">
+  <title>Learning Scala through Advent of Code — Oussama Ben Nasr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Oussama Ben Nasr" href="/feed.xml">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="nav-logo">Oussama Ben Nasr</a>
+  <ul class="nav-links">
+    <li><a href="/" >Home</a></li>
+    <li><a href="/posts/" class="active">Posts</a></li>
+    <li><a href="/about/" >About</a></li>
+    <li><a href="/feed.xml">RSS</a></li>
+  </ul>
+</nav>
+
+<main>
+  <article class="post-article">
+  <header class="post-header">
+    <div class="post-header-inner">
+      <div class="post-tag-label">Scala</div>
+      <h1 class="post-title">Learning Scala through Advent of Code</h1>
+      <p class="post-subtitle">How solving daily puzzles accelerated my functional programming intuition in ways no tutorial could.</p>
+      <div class="post-meta-bar">
+        <span>Dec 2022</span>
+        <span class="dot">·</span>
+        <span>3 min read</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body">
+    <p>Every December, thousands of developers open their laptops at midnight to race through algorithmic puzzles. I did Advent of Code 2022 in Scala — a language I'd been circling for months but never committed to. It turned out to be the fastest way to learn I've ever tried.</p>
+<h2>Why puzzles teach better than tutorials</h2>
+<p>Tutorials show you the happy path. Puzzles put you in a corner and make you find a way out. When day 5 of AoC hands you a stack-rearrangement problem, you don't have the luxury of skipping the &quot;collections&quot; chapter. You need <code>List</code>, <code>Stack</code>, <code>foldLeft</code>, and you need them <em>now</em>.</p>
+<figure>
+<svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+  <!-- Tutorial path -->
+  <rect x="20" y="20" width="140" height="200" rx="6" fill="#f3f1ec" stroke="#ddd" stroke-width="1.5"/>
+  <text x="90" y="45" text-anchor="middle" font-size="11" font-weight="500" fill="#6b6b65">TUTORIAL</text>
+  <rect x="35" y="58" width="110" height="24" rx="3" fill="#e8e0d8"/>
+  <text x="90" y="74" text-anchor="middle" font-size="10" fill="#6b6b65">Chapter 1: Syntax</text>
+  <rect x="35" y="88" width="110" height="24" rx="3" fill="#e8e0d8"/>
+  <text x="90" y="104" text-anchor="middle" font-size="10" fill="#6b6b65">Chapter 2: Types</text>
+  <rect x="35" y="118" width="110" height="24" rx="3" fill="#e8e0d8"/>
+  <text x="90" y="134" text-anchor="middle" font-size="10" fill="#6b6b65">Chapter 3: Collections</text>
+  <rect x="35" y="148" width="110" height="24" rx="3" fill="#e8e0d8"/>
+  <text x="90" y="164" text-anchor="middle" font-size="10" fill="#6b6b65">Chapter 4: FP</text>
+  <rect x="35" y="178" width="110" height="24" rx="3" fill="#ddd" stroke-dasharray="4,2" stroke-width="1"/>
+  <text x="90" y="194" text-anchor="middle" font-size="10" fill="#aaa">Chapter 5: ...</text>
+  <!-- Arrow -->
+<p><text x="185" y="125" font-size="28" fill="#c8593a">→</text></p>
+  <!-- Puzzle path -->
+  <rect x="220" y="20" width="440" height="220" rx="6" fill="#fff" stroke="#c8593a" stroke-width="1.5"/>
+  <text x="440" y="45" text-anchor="middle" font-size="11" font-weight="500" fill="#c8593a">ADVENT OF CODE — DAY 5</text>
+  <!-- Puzzle stacks -->
+  <g transform="translate(240, 65)">
+    <text font-size="10" fill="#6b6b65" font-weight="500">Input stacks:</text>
+    <!-- Stack 1 -->
+    <rect x="0" y="20" width="36" height="20" rx="2" fill="#c8593a"/>
+    <text x="18" y="34" text-anchor="middle" font-size="11" fill="white" font-weight="500">N</text>
+    <rect x="0" y="42" width="36" height="20" rx="2" fill="#c8593a" opacity=".8"/>
+    <text x="18" y="56" text-anchor="middle" font-size="11" fill="white" font-weight="500">Z</text>
+    <rect x="0" y="64" width="36" height="20" rx="2" fill="#c8593a" opacity=".6"/>
+    <text x="18" y="78" text-anchor="middle" font-size="11" fill="white" font-weight="500">P</text>
+    <!-- Stack 2 -->
+    <rect x="46" y="20" width="36" height="20" rx="2" fill="#4a90d9"/>
+    <text x="64" y="34" text-anchor="middle" font-size="11" fill="white" font-weight="500">D</text>
+    <rect x="46" y="42" width="36" height="20" rx="2" fill="#4a90d9" opacity=".8"/>
+    <text x="64" y="56" text-anchor="middle" font-size="11" fill="white" font-weight="500">C</text>
+    <!-- Stack 3 -->
+    <rect x="92" y="20" width="36" height="20" rx="2" fill="#2e7d5e"/>
+    <text x="110" y="34" text-anchor="middle" font-size="11" fill="white" font-weight="500">M</text>
+    <!-- Labels -->
+    <text x="18" y="102" text-anchor="middle" font-size="9" fill="#aaa">1</text>
+    <text x="64" y="102" text-anchor="middle" font-size="9" fill="#aaa">2</text>
+    <text x="110" y="102" text-anchor="middle" font-size="9" fill="#aaa">3</text>
+  </g>
+  <!-- Code snippet -->
+  <rect x="375" y="60" width="265" height="155" rx="4" fill="#1a1a18"/>
+  <text x="390" y="82" font-size="10" fill="#6b9e6b" font-family="Courier New">// You need this RIGHT NOW</text>
+  <text x="390" y="100" font-size="10" fill="#e8947a" font-family="Courier New">val</text>
+  <text x="415" y="100" font-size="10" fill="#e8e8e2" font-family="Courier New"> stacks = input</text>
+  <text x="390" y="118" font-size="10" fill="#e8e8e2" font-family="Courier New">  .foldLeft(Map.empty) {</text>
+  <text x="390" y="136" font-size="10" fill="#e8e8e2" font-family="Courier New">    (acc, move) =&gt;</text>
+  <text x="390" y="154" font-size="10" fill="#e8e8e2" font-family="Courier New">      acc.updated(</text>
+  <text x="390" y="172" font-size="10" fill="#e8e8e2" font-family="Courier New">        move.to,</text>
+  <text x="390" y="190" font-size="10" fill="#4a90d9" font-family="Courier New">        crates ::: rest)</text>
+  <text x="390" y="207" font-size="10" fill="#e8e8e2" font-family="Courier New">  }</text>
+</svg>
+<figcaption>Tutorial: linear chapters you can skip. AoC: you need everything at once, right now.</figcaption>
+</figure>
+<h2>The FP concepts that finally clicked</h2>
+<h3>Pattern matching is not just a switch statement</h3>
+<p>Coming from JavaScript, I thought pattern matching was syntactic sugar for <code>switch</code>. Scala showed me how wrong I was. You can match on case classes, destructure nested structures, and guard with conditions — all in one expression that the compiler checks exhaustively.</p>
+<pre><code class="language-scala">sealed trait Move
+case class Push(from: Int, to: Int, count: Int) extends Move
+case class Pop(stack: Int) extends Move
+
+def apply(stacks: Map[Int, List[Char]], move: Move): Map[Int, List[Char]] =
+  move match {
+    case Push(from, to, n) =&gt;
+      val (moving, rest) = stacks(from).splitAt(n)
+      stacks
+        .updated(from, rest)
+        .updated(to, moving.reverse ::: stacks(to))
+    case Pop(stack) =&gt;
+      stacks.updated(stack, stacks(stack).tail)
+  }
+</code></pre>
+<p>The compiler will warn you if you add a new <code>Move</code> subtype and forget to handle it. No runtime surprises.</p>
+<h3><code>foldLeft</code> as a loop replacement</h3>
+<p>Before AoC, I used <code>foldLeft</code> when I thought it was &quot;the Scala thing to do.&quot; After solving fifteen puzzles with it, I understood it intuitively — it's a loop that builds up a value without mutation.</p>
+<figure>
+<svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" font-family="DM Sans, sans-serif">
+  <text x="20" y="30" font-size="12" font-weight="500" fill="#1a1a18">List(1, 2, 3, 4).foldLeft(0)(_ + _)</text>
+  <!-- Steps -->
+  <g transform="translate(20, 50)">
+    <!-- acc=0 -->
+    <rect x="0" y="0" width="70" height="36" rx="4" fill="#f3f1ec" stroke="#ddd" stroke-width="1"/>
+    <text x="35" y="14" text-anchor="middle" font-size="9" fill="#6b6b65">acc</text>
+    <text x="35" y="30" text-anchor="middle" font-size="14" font-weight="500" fill="#1a1a18">0</text>
+<p><text x="85" y="22" font-size="12" fill="#c8593a">+1</text>
+<line x1="80" y1="18" x2="105" y2="18" stroke="#c8593a" stroke-width="1.5" marker-end="url(#arr)"/></p>
+<p><rect x="110" y="0" width="70" height="36" rx="4" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+<text x="145" y="14" text-anchor="middle" font-size="9" fill="#c8593a">acc</text>
+<text x="145" y="30" text-anchor="middle" font-size="14" font-weight="500" fill="#c8593a">1</text></p>
+<p><text x="195" y="22" font-size="12" fill="#c8593a">+2</text>
+<line x1="190" y1="18" x2="215" y2="18" stroke="#c8593a" stroke-width="1.5"/></p>
+<p><rect x="220" y="0" width="70" height="36" rx="4" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+<text x="255" y="14" text-anchor="middle" font-size="9" fill="#c8593a">acc</text>
+<text x="255" y="30" text-anchor="middle" font-size="14" font-weight="500" fill="#c8593a">3</text></p>
+<p><text x="305" y="22" font-size="12" fill="#c8593a">+3</text>
+<line x1="300" y1="18" x2="325" y2="18" stroke="#c8593a" stroke-width="1.5"/></p>
+<p><rect x="330" y="0" width="70" height="36" rx="4" fill="#f5ede9" stroke="#c8593a" stroke-width="1"/>
+<text x="365" y="14" text-anchor="middle" font-size="9" fill="#c8593a">acc</text>
+<text x="365" y="30" text-anchor="middle" font-size="14" font-weight="500" fill="#c8593a">6</text></p>
+<p><text x="415" y="22" font-size="12" fill="#c8593a">+4</text>
+<line x1="410" y1="18" x2="435" y2="18" stroke="#c8593a" stroke-width="1.5"/></p>
+<p><rect x="440" y="0" width="80" height="36" rx="4" fill="#1a1a18" stroke="#1a1a18" stroke-width="1"/>
+<text x="480" y="14" text-anchor="middle" font-size="9" fill="#e8947a">result</text>
+<text x="480" y="30" text-anchor="middle" font-size="14" font-weight="500" fill="white">10</text>
+</g></p>
+<p><text x="20" y="130" font-size="11" fill="#6b6b65">No mutation. No index variable. No off-by-one errors. Just a value accumulating through transformations.</text>
+</svg></p>
+<figcaption>foldLeft visualised: each element transforms the accumulator, producing a new value at every step.</figcaption>
+</figure>
+<h2>What I shipped by day 25</h2>
+<p>By the end of the month I had written parsers using <code>split</code> and regex combinators, graph traversal with <code>BFS</code> implemented in pure Scala, dynamic programming with memoization using <code>Map</code> as a cache, and coordinate systems using <code>case class Point(x: Int, y: Int)</code> with operator overloading.</p>
+<p>None of this came from a tutorial. It came from needing it.</p>
+<h2>The key takeaway</h2>
+<p>If you want to learn a language, find a problem space that forces you to use all of it. AoC is perfect for this because every day is a different domain: strings, graphs, geometry, simulation. You can't stay in your comfort zone.</p>
+<p>Start with day 1. Don't look at others' solutions until you've submitted your own. The struggle is the lesson.</p>
+
+  </div>
+
+  <footer class="post-footer">
+    <a href="/posts/" class="btn btn-ghost">← Back to all posts</a>
+  </footer>
+</article>
+
+</main>
+
+<footer class="footer">
+  <p>© 2024 Oussama Ben Nasr. Built with Eleventy.</p>
+  <ul class="footer-links">
+    <li><a href="https://github.com/Oussama-Ben-Nasr" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="/feed.xml">RSS</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>

@@ -1,185 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Oussama Ben Nasr, SDE, personal blog, software development engineer, Higher School of Communication, SUPCOM">
-		<link rel="stylesheet" href="/css/style.css" />
-		<title>Welcome</title>
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="manifest" href="/site.webmanifest">
-		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-		<meta name="msapplication-TileColor" content="#da532c">
-		<meta name="theme-color" content="#ffffff">
-	</head>
-	<body>
-		<header><nav class="navbar is-light" role="navigation" aria-label="main navigation">
-  <div class="navbar-start">
-    <div class="navbar-item has-text-weight-bold">
-      Oussama Ben Nasr&#39;s blog
-    </div>
-  </div>
-  <div class="navbar-end">
-    <a href="/" class="navbar-item">
-      Home
-    </a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A developer blog about code, craft, and curiosity.">
+  <title>Oussama Ben Nasr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Oussama Ben Nasr" href="/feed.xml">
+</head>
+<body>
 
-    <a href="/about" class="navbar-item">
-      About Me
-    </a>
-  </div>
+<nav class="nav">
+  <a href="/" class="nav-logo">Oussama Ben Nasr</a>
+  <ul class="nav-links">
+    <li><a href="/" class="active">Home</a></li>
+    <li><a href="/posts/" >Posts</a></li>
+    <li><a href="/about/" >About</a></li>
+    <li><a href="/feed.xml">RSS</a></li>
+  </ul>
 </nav>
-</header>
-		<main>
-			
-<section class="hero is-medium is-info is-bold">
-  <div class="hero-body">
-    <nav class="level">
-    <div class="level-left">
-    <div class="container">
-      <h1 class="title">Oussama Ben Nasr&#39;s blog</h1>
-      <h2 class="subtitle">My thaughts and projects.</h2>
+
+<main>
+  
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">Personal Blog &amp; Notes</p>
+    <h1>Writing on code, craft, <em>and curiosity.</em></h1>
+    <p class="hero-desc">I'm a developer who writes about software engineering, functional programming, tools I find interesting, and things I'm learning along the way.</p>
+    <div class="hero-actions">
+      <a href="/posts/" class="btn btn-primary">Read the blog →</a>
+      <a href="/about/" class="btn btn-ghost">About me</a>
     </div>
-    </div>
-    <div class="level-right">  
+  </div>
+  <div class="hero-avatar">
+    <span class="avatar-initials">OB</span>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <div class="search-bar">
+    <span>🔍</span>
+    <input type="text" placeholder="Search posts…" id="search-input" aria-label="Search posts">
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Recent posts</h2>
+    <a href="/posts/" class="section-link">All posts →</a>
+  </div>
+  <div class="posts-featured" id="featured-posts">
+    
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">More posts</h2>
+  </div>
+  <div class="posts-list" id="more-posts">
+    
+    <a href="" class="post-row">
       <div>
-        <figure class="image is-128x128 to-right">
-          <picture>
-			        <source type="image/png" srcset="/images/ToI2MqroAP-730.png 730w" sizes="100vw">
-		        <img
-			  class="is-rounded"
-		          alt="oussama"
-		          src="/images/ToI2MqroAP-730.png"
-		          width="730"
-		          height="699">
-			      </picture>
-        </figure>
+        <div class="post-row-title"></div>
+        <div class="post-row-desc"></div>
       </div>
-    </nav>
-    </div>
-</section>
-
-
-<section class="postlist mt-3 pt-3">
-  <div class="container">
-    <h2 class="title has-text-centered mt-3 mb-6">Recent posts</h2>
-    <div class="columns">
-      
-        
-          <div class="column">
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title">
-                  let&#39;s optimize.
-                </p>
-              </header>
-              <div class="card-content">
-                <div class="content">
-                  We&#39;ll walk through implementing basic optimization algorithms.
-                </div>
-              </div>
-              <footer class="card-footer">
-                <a href="/posts/second-post/" class="button is-fullwidth is-link card-footer-item">Read more...</a>
-              </footer>
-            </div>
-          </div>
-          
-      
-        
-          <div class="column">
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title">
-                  How quick is Quick sort!
-                </p>
-              </header>
-              <div class="card-content">
-                <div class="content">
-                  We&#39;ll walk through sorting algorithms.
-                </div>
-              </div>
-              <footer class="card-footer">
-                <a href="/posts/third-post/" class="button is-fullwidth is-link card-footer-item">Read more...</a>
-              </footer>
-            </div>
-          </div>
-          
-      
-        
-          <div class="column">
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title">
-                  Conway&#39;s game of life
-                </p>
-              </header>
-              <div class="card-content">
-                <div class="content">
-                  Specification and implementation of a simple grid simulation.
-                </div>
-              </div>
-              <footer class="card-footer">
-                <a href="/posts/first-post/" class="button is-fullwidth is-link card-footer-item">Read more...</a>
-              </footer>
-            </div>
-          </div>
-          
-      
-        
-      
-    </div>
+      <div class="post-row-date">Invalid DateTime</div>
+    </a>
+    
+    <a href="" class="post-row">
+      <div>
+        <div class="post-row-title"></div>
+        <div class="post-row-desc"></div>
+      </div>
+      <div class="post-row-date">Invalid DateTime</div>
+    </a>
+    
+    <a href="" class="post-row">
+      <div>
+        <div class="post-row-title"></div>
+        <div class="post-row-desc"></div>
+      </div>
+      <div class="post-row-date">Invalid DateTime</div>
+    </a>
+    
   </div>
 </section>
 
-
-<section class="postlist mt-3 pt-3">
-  <div class="container">
-    <h2 class="title has-text-left mt-3 mb-6">More posts</h2>
-    <div class="columns">
-      
-        
-      
-        
-      
-        
-      
-        
-          <div class="column">
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title">
-                  Another creepy RE engine!
-                </p>
-              </header>
-              <div class="card-content">
-                <div class="content">
-                  We&#39;ll go through implementing a string matching engine supporting . and * quantifiers.
-                </div>
-              </div>
-              <footer class="card-footer">
-                <a href="/posts/fourth-post/" class="button is-fullwidth is-link card-footer-item">Read more...</a>
-              </footer>
-            </div>
-          </div>
-          
-      
+<div class="about-strip" id="about-strip">
+  <div class="about-inner">
+    <div>
+      <h2>A developer who likes to <em>write</em> as much as code.</h2>
+      <p>I started this blog to document what I'm learning and share ideas with anyone curious enough to read them.</p>
+    </div>
+    <div class="about-tags">
+      <span class="about-tag">Scala</span>
+      <span class="about-tag">JavaScript</span>
+      <span class="about-tag">Eleventy</span>
+      <span class="about-tag">Functional Programming</span>
+      <span class="about-tag">Open Source</span>
+      <span class="about-tag">Linux</span>
+      <span class="about-tag">CI/CD</span>
+      <span class="about-tag">Clean Code</span>
     </div>
   </div>
-</section>
+</div>
 
-		</main>
-		<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
-      Built with &#10084, <a href="https://www.11ty.dev/"><strong>11ty</strong></a> and <a href="https://bulma.io/"><strong>Bulma</strong></a>.
-    </p>
-    <p>
-      <a href="mailto:oussama.bennasr@supcom.tn">oussama.bennasr@supcom.tn</a>
-    </p>
-  </div>
+<script>
+const input = document.getElementById('search-input');
+const allItems = document.querySelectorAll('.post-card, .post-row');
+input.addEventListener('input', () => {
+  const q = input.value.toLowerCase().trim();
+  allItems.forEach(el => {
+    const match = !q || el.textContent.toLowerCase().includes(q);
+    el.style.opacity = match ? '1' : '0.2';
+    el.style.pointerEvents = match ? 'auto' : 'none';
+  });
+});
+</script>
+
+</main>
+
+<footer class="footer">
+  <p>© 2024 Oussama Ben Nasr. Built with Eleventy.</p>
+  <ul class="footer-links">
+    <li><a href="https://github.com/Oussama-Ben-Nasr" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="/feed.xml">RSS</a></li>
+  </ul>
 </footer>
 
-	</body>
+</body>
 </html>
